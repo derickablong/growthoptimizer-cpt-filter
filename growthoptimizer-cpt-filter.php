@@ -227,9 +227,9 @@ class GrowthOptimizer_CPT_Filter
 
             foreach ($terms as $term) {
                 $article_term[] = '<span class="cpt-term cpt-term-'. $term->term_id .'">'. $term->name .'</span>';
-            }
-            echo '<div class="cpt-terms">'. implode('', $article_term) .'</div>';
-        }        
+            }            
+        }    
+        echo '<div class="cpt-terms">'. implode('', $article_term) .'</div>';    
         return ob_get_clean();
     }
 
