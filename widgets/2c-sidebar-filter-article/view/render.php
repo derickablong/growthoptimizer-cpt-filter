@@ -34,6 +34,6 @@ foreach ($settings as $tax_name => $value) {
 
 <div class="cpt-2c-sidebar-filter-article" data-post_type="<?php echo $post_type ?>" data-per_page="<?php echo $per_page ?>" data-loop="<?php echo $loop_template ?>">
     <?php do_action('2c-sidebar-filter-article-parts-sidebar', $post_type, $taxonomies, $taxonomy_icons); ?>
-    <?php do_action('2c-sidebar-filter-article-parts-content'); ?>
+    <?php do_action('2c-sidebar-filter-article-parts-content', $post_type); ?>
 </div>
 <?php endif; ?>

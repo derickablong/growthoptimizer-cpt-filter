@@ -130,7 +130,7 @@ class GrowthOptimizer_CPT_Filter
             '2c-sidebar-filter-article-parts-content',
             [$this, 'template_2c_sidebar_filter_article_parts_content'],
             10,
-            2
+            1
         );                                     
         # Ajax loop
         add_action(
@@ -232,10 +232,13 @@ class GrowthOptimizer_CPT_Filter
 
     /**
      * 2C Sidebar Filter Article Parts Content
+     * 
+     * @param string $slug
      * @return void
      */
-    public function template_2c_sidebar_filter_article_parts_content()
+    public function template_2c_sidebar_filter_article_parts_content($slug)
     {
+        $post_type = get_post_type_object( $slug );
         include $this->widgets_dir . '2c-sidebar-filter-article/parts/content.php';
     }
 
