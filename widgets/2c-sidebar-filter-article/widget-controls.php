@@ -356,6 +356,37 @@ $this->add_group_control(
     ]
 );
 
+$this->add_control(
+	'search_bg_color',
+	[
+		'label'     => esc_html__( 'Background', 'elementor' ),
+		'type'      => \Elementor\Controls_Manager::COLOR,
+		'selectors' => [
+			'{{WRAPPER}} .search-widget' => 'background-color: {{VALUE}};',
+		],
+	]
+);
+
+$this->add_group_control(
+    \Elementor\Group_Control_Border::get_type(),
+    [
+        'name' => 'search_border',
+        'selector' => '{{WRAPPER}} .search-widget',
+    ]
+);
+
+$this->add_responsive_control(
+    'search_border_radius',
+    [
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'label' => esc_html__( 'Border Radius', 'elementor' ),
+        'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+        'selectors' => [
+            '{{WRAPPER}} .search-widget' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
+
 $this->add_responsive_control(
     'search_spacing',
     [
