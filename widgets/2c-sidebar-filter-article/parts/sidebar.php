@@ -2,7 +2,7 @@
 
 <div class="go-sidebar">
     <div class="filters">
-        <h3 class="sidebar-title">Filters</h3>
+        <h3 class="sidebar-title">Filter</h3>
         
         <div class="taxonomies">
         <?php 
@@ -16,7 +16,7 @@
 
             ?>
 
-            <div class="taxonomy-group">
+            <div class="taxonomy-group active">
                 <div class="taxonomy-title">
                     <span class="icon">
                         <?php \Elementor\Icons_Manager::render_icon( $icons[$tax_slug], [ 'aria-hidden' => 'true' ] ); ?>
