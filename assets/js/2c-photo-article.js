@@ -1,5 +1,5 @@
 (function($) {    
-    TWO_C_PHOTO_ARTICLE = {
+    GO_2C_PHOTO_ARTICLE = {
         doc      : null,
         paged    : 0,
         per_page : 0,
@@ -7,24 +7,24 @@
         loop     : 0,
 
         init: function() {
-            TWO_C_PHOTO_ARTICLE.set(
-                TWO_C_PHOTO_ARTICLE.actions
+            GO_2C_PHOTO_ARTICLE.set(
+                GO_2C_PHOTO_ARTICLE.actions
             );            
         },
 
         set: function(_callback) {
 
-            TWO_C_PHOTO_ARTICLE.doc       = $(document);
-            TWO_C_PHOTO_ARTICLE.paged     = 1;
-            TWO_C_PHOTO_ARTICLE.post_type = $('.cpt-2c-photo-article').data('post_type');            
-            TWO_C_PHOTO_ARTICLE.per_page  = parseInt($('.cpt-2c-photo-article').data('per_page'));
-            TWO_C_PHOTO_ARTICLE.loop      = parseInt($('.cpt-2c-photo-article').data('loop'));
+            GO_2C_PHOTO_ARTICLE.doc       = $(document);
+            GO_2C_PHOTO_ARTICLE.paged     = 1;
+            GO_2C_PHOTO_ARTICLE.post_type = $('.cpt-2c-photo-article').data('post_type');            
+            GO_2C_PHOTO_ARTICLE.per_page  = parseInt($('.cpt-2c-photo-article').data('per_page'));
+            GO_2C_PHOTO_ARTICLE.loop      = parseInt($('.cpt-2c-photo-article').data('loop'));
             _callback();
         },
 
         actions: function() {
             // Display dropdown
-            TWO_C_PHOTO_ARTICLE.doc.on('click', '.filter-btn', function(e) {
+            GO_2C_PHOTO_ARTICLE.doc.on('click', '.filter-btn', function(e) {
                 e.preventDefault();
                 let $btn  = $(this);
                 let $item = $btn.parent();
@@ -51,19 +51,19 @@
             });
 
             // Sort by date
-            TWO_C_PHOTO_ARTICLE.doc.on('click', '.dropdown.sort a', function(e) {
+            GO_2C_PHOTO_ARTICLE.doc.on('click', '.dropdown.sort a', function(e) {
                 e.preventDefault();
         
                 $('.dropdown.sort a').removeClass('selected');
                 $(this).addClass('selected');
                 
-                TWO_C_PHOTO_ARTICLE.paged = 1;
-                TWO_C_PHOTO_ARTICLE.request();
+                GO_2C_PHOTO_ARTICLE.paged = 1;
+                GO_2C_PHOTO_ARTICLE.request();
         
             });
 
             // Select checkbox
-            TWO_C_PHOTO_ARTICLE.doc.on('click', '.dropdown.categories a', function(e) {
+            GO_2C_PHOTO_ARTICLE.doc.on('click', '.dropdown.categories a', function(e) {
                 e.preventDefault();
 
                 let $checkbox = $(this);
@@ -73,12 +73,12 @@
                     $checkbox.addClass('selected');
                 }
 
-                TWO_C_PHOTO_ARTICLE.paged = 1;
-                TWO_C_PHOTO_ARTICLE.request();
+                GO_2C_PHOTO_ARTICLE.paged = 1;
+                GO_2C_PHOTO_ARTICLE.request();
             });
             
             // Remove term selected when a term button is clicked
-            TWO_C_PHOTO_ARTICLE.doc.on('click', '.term-selected', function(e) {
+            GO_2C_PHOTO_ARTICLE.doc.on('click', '.term-selected', function(e) {
                 e.preventDefault();
                 let $term = $(this);
                 let _term_id = $term.find('.term_data').data('id');
@@ -91,12 +91,12 @@
 
                 // After removal, you may need to call a function to update the page display, filters, etc.
                 // This is an example of what you might do
-                TWO_C_PHOTO_ARTICLE.paged = 1;
-                TWO_C_PHOTO_ARTICLE.request();
+                GO_2C_PHOTO_ARTICLE.paged = 1;
+                GO_2C_PHOTO_ARTICLE.request();
             });
 
             // Outside element
-            TWO_C_PHOTO_ARTICLE.doc.click(function(event) { 
+            GO_2C_PHOTO_ARTICLE.doc.click(function(event) { 
                 var $target = $(event.target);
                 if(!$target.closest('.filter-item').length && !$target.closest('.daterangepicker').length) {            
                     $('.filter-btn, .dropdown').removeClass('active');
@@ -104,41 +104,41 @@
             });
 
             // Load more
-            TWO_C_PHOTO_ARTICLE.doc.on('click', '.load-more a', function(e) {
+            GO_2C_PHOTO_ARTICLE.doc.on('click', '.load-more a', function(e) {
                 e.preventDefault();
-                TWO_C_PHOTO_ARTICLE.paged += 1;
-                TWO_C_PHOTO_ARTICLE.request();
+                GO_2C_PHOTO_ARTICLE.paged += 1;
+                GO_2C_PHOTO_ARTICLE.request();
             });
 
             // Load default articles
-            TWO_C_PHOTO_ARTICLE.request();
+            GO_2C_PHOTO_ARTICLE.request();
         },
 
         request: function() {
             $('.filter-results, .load-more, .applied-filters').addClass('loading');
-            TWO_C_PHOTO_ARTICLE.get_terms(function(taxonomies, order) {                
+            GO_2C_PHOTO_ARTICLE.get_terms(function(taxonomies, order) {                
                 $.ajax({
                     url     : go_kit.ajaxurl,
                     type    : 'POST',
                     dataType: 'json',
                     data    : {
                         action    : '2c_photo_article',
-                        post_type : TWO_C_PHOTO_ARTICLE.post_type,                        
-                        paged     : TWO_C_PHOTO_ARTICLE.paged,
-                        per_page  : TWO_C_PHOTO_ARTICLE.per_page,
-                        loop      : TWO_C_PHOTO_ARTICLE.loop,
+                        post_type : GO_2C_PHOTO_ARTICLE.post_type,                        
+                        paged     : GO_2C_PHOTO_ARTICLE.paged,
+                        per_page  : GO_2C_PHOTO_ARTICLE.per_page,
+                        loop      : GO_2C_PHOTO_ARTICLE.loop,
                         taxonomies: taxonomies,
                         order     : order
                     }
                 }).done(function( _response ) {
                     console.log(_response.args);
-                    if (parseInt(_response.data.found_posts) >= TWO_C_PHOTO_ARTICLE.per_page) {
+                    if (parseInt(_response.data.found_posts) >= GO_2C_PHOTO_ARTICLE.per_page) {
                         $('.load-more').css('display', 'flex');
                     } else {
                         $('.load-more').hide();
                     }
 
-                    if (TWO_C_PHOTO_ARTICLE.paged > 1) {
+                    if (GO_2C_PHOTO_ARTICLE.paged > 1) {
                         $('.filter-results').append(_response.posts);
                     } else {                    
                         $('.filter-results').html(_response.posts);
@@ -192,5 +192,5 @@
             _callback(taxonomies, order);
         }
     }
-    TWO_C_PHOTO_ARTICLE.init();
+    GO_2C_PHOTO_ARTICLE.init();
 })(jQuery)

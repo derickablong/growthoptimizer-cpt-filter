@@ -31,7 +31,7 @@
                 <div class="terms">
 
                     <label for="view-all-<?php echo $tax_slug ?>">
-                        <input type="checkbox" class="term" id="view-all-<?php echo $tax_slug ?>" value="view-all" checked>
+                        <input type="checkbox" class="term term-view-all" id="view-all-<?php echo $tax_slug ?>" value="view-all" data-term="<?php echo $tax_slug ?>" checked>
                         <span class="checkbox">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
                                 <path d="M3.58583 5.06059L1.46451 2.93927L0.050293 4.35348L3.58583 7.88901L9.94979 1.52505L8.53557 0.11084L3.58583 5.06059Z" fill="white"/>
@@ -43,7 +43,7 @@
                     <?php foreach ($terms as $term): ?>
 
                         <label for="term-<?php echo $term->term_id ?>">
-                            <input type="checkbox" class="term" id="term-<?php echo $term->term_id ?>" value="<?php echo $term->term_id ?>">
+                            <input type="checkbox" class="term term-checkbox" id="term-<?php echo $term->term_id ?>"  data-term="<?php echo $tax_slug ?>" value="<?php echo $term->term_id ?>">
                             <span class="checkbox">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
                                     <path d="M3.58583 5.06059L1.46451 2.93927L0.050293 4.35348L3.58583 7.88901L9.94979 1.52505L8.53557 0.11084L3.58583 5.06059Z" fill="white"/>

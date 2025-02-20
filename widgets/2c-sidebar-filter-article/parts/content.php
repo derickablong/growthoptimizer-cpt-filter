@@ -8,5 +8,7 @@
             <input type="text" placeholder="Search News">
         </div>
 
+        <div class="results loading"></div>
+
     </div>
 </div>

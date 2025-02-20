@@ -309,7 +309,59 @@ class GrowthOptimizer_CPT_Filter
      */
     public function ajax_2c_sidebar_filter_article()
     {
-        wp_send_json();
+        ob_start();
+
+        # Target CPT
+        $post_type  = $_POST['post_type'];
+        $taxonomies = $_POST['taxonomies'];
+        $loop_item  = $_POST['loop'];
+
+        # Filter
+        $paged    = $_POST['paged'];
+        $per_page = $_POST['per_page'];
+
+        $args = [
+            'post_type'      => $post_type,
+            'post_status'    => 'publish',
+            'posts_per_page' => $per_page,
+            'paged'          => $paged,
+            'orderby'        => 'date',
+            'order'          => 'DESC'
+        ];
+
+        # Category
+        if (!empty($taxonomies)) {
+            $tax_group = [];
+            foreach ($taxonomies as $taxonomy) {
+                if ($taxonomy['term_id'] == 'view-all') continue;
+                $tax_group[$taxonomy['taxonomy']][] = $taxonomy['term_id'];
+            }
+          
+            foreach ($tax_group as $taxonomy => $categories) {
+                $args['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $categories,
+                    'operator' => 'IN'
+                ];
+            }
+        }
+
+        $results = new WP_Query($args);
+        if ($results->have_posts()): 
+            while ($results->have_posts()): $results->the_post();
+                echo do_shortcode('[elementor-template id="'. $loop_item .'"]');
+            endwhile; 
+        else:
+            echo '<div class="no-results">No article found.</div>';
+        endif;
+
+        wp_send_json([
+            'posts'  => ob_get_clean(),
+            'filter' => $_POST,
+            'args'   => $args,
+            'data'   => $results
+        ]);
         wp_die();
     }
 

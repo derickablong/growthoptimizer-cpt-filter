@@ -8,7 +8,6 @@ $post_type     = $settings['post_type'];
 $loop_template = $settings['loop_template'];
 $taxonomies    = [];
 $per_page      = $settings['posts_per_page'];
-$columns       = $settings['grid_columns'];
 
 foreach ($settings as $tax_name => $value) {
     if (!str_contains($tax_name, 'taxonomy_')) continue;    

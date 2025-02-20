@@ -92,7 +92,7 @@ $this->add_responsive_control(
         'tablet_default'     => 1,
         'mobile_default'     => 1,
         'selectors'          => [
-            '{{WRAPPER}} .filter-results' => 'grid-template-columns: repeat({{SIZE}},1fr);',
+            '{{WRAPPER}} .go-content .results' => 'grid-template-columns: repeat({{SIZE}},1fr);',
         ],
     ]
 );
@@ -143,7 +143,7 @@ $this->add_responsive_control(
             'unit' => 'px'
         ],
         'selectors'          => [
-            '{{WRAPPER}} .filter-results' => 'column-gap: {{VALUE}}px;',
+            '{{WRAPPER}} .go-content .results' => 'column-gap: {{VALUE}}px;',
         ],
     ]
 );
@@ -161,45 +161,9 @@ $this->add_responsive_control(
         'tablet_default'     => 30,
         'mobile_default'     => 30,
         'selectors'          => [
-            '{{WRAPPER}} .filter-results' => 'row-gap: {{VALUE}}px;',
+            '{{WRAPPER}} .go-content .results' => 'row-gap: {{VALUE}}px;',
         ],
     ]
 );
-
-$this->end_controls_section();
-
-
-
-# Button style
-$this->start_controls_section(
-    'section_2c_photo_article_button_style',
-    [
-        'label' => __( 'Buttons', 'elementor' ),
-        'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-    ]
-);	
-
-# Control filter button
-$this->add_control(
-    'filter_button_class',
-    [
-        'label'   => __( 'Filter Button', 'elementor' ),
-        'type'    => \Elementor\Controls_Manager::SELECT,
-        'options' => BUTTON_CLASSES,
-        'default' => 'primary',
-    ]
-);
-
-# Control load more button
-$this->add_control(
-    'load_more_button_class',
-    [
-        'label'   => __( 'Load More Button', 'elementor' ),
-        'type'    => \Elementor\Controls_Manager::SELECT,
-        'options' => BUTTON_CLASSES,
-        'default' => 'primary',
-    ]
-);
-
 
 $this->end_controls_section();
