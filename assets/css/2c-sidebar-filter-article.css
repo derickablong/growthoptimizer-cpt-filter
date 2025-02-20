@@ -97,6 +97,7 @@
 .go-content {
     padding-top: 130px;
     padding-left: 120px;
+    padding-bottom: 99px;
     background-color: #fff;
 }
 .go-content .inner-content {
@@ -202,5 +203,6 @@
     }
     .go-content {
         padding-top: 7%;
+        padding-bottom: 7%;
     }
 }
