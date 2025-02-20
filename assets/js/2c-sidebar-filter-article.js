@@ -1,6 +1,7 @@
 (function($) {
     GO_2C_SIDEBAR_FILTER_ARTICLE = {
         doc          : null,
+        window       : null,
         active_toggle: null,
         results      : null,
         paged        : 0,
@@ -32,6 +33,13 @@
 
             // Load default
             GO_2C_SIDEBAR_FILTER_ARTICLE._request();
+
+            // Close toggle if mobile
+            GO_2C_SIDEBAR_FILTER_ARTICLE.window.on(
+                'resize', 
+                GO_2C_SIDEBAR_FILTER_ARTICLE._resize
+            );
+            GO_2C_SIDEBAR_FILTER_ARTICLE.window.trigger('resize');
 
         },
 
@@ -113,8 +121,17 @@
             GO_2C_SIDEBAR_FILTER_ARTICLE._request();
         },
 
+        _resize: function() {
+            if (GO_2C_SIDEBAR_FILTER_ARTICLE.window.width() <= 820) {
+                $('.taxonomy-group').removeClass('active');
+            } else {
+                $('.taxonomy-group').addClass('active');
+            }
+        },
+
         _elements: function(_callback) {
             GO_2C_SIDEBAR_FILTER_ARTICLE.doc       = $(document);
+            GO_2C_SIDEBAR_FILTER_ARTICLE.window    = $(window);
             GO_2C_SIDEBAR_FILTER_ARTICLE.paged     = 1;
             GO_2C_SIDEBAR_FILTER_ARTICLE.post_type = $('.cpt-2c-sidebar-filter-article').data('post_type');
             GO_2C_SIDEBAR_FILTER_ARTICLE.per_page  = parseInt($('.cpt-2c-sidebar-filter-article').data('per_page'));
