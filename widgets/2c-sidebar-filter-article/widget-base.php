@@ -1,8 +1,8 @@
 <?php
 
-use ElementorPro\Modules\QueryControl\Module as Module_Query;
 
-class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
+class GO_2C_SIDEBAR_FILTER_ARTICLE_WIDGET extends \Elementor\Widget_Base {
+
 
 	/**
 	 * Get widget name.
@@ -15,7 +15,7 @@ class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'go_2c_photo_article_loop';
+		return 'go_2c_sidebar_filter_article';
 	}
 
 	/**
@@ -29,7 +29,7 @@ class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( '2C Photo Article Loop', 'elementor' );
+		return __( '2C Sidebar Filter Article Loop', 'elementor' );
 	}
 
 	/**
@@ -68,7 +68,7 @@ class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function _register_controls() { require ( __DIR__ . '/controls.php' ); }
+	protected function _register_controls() { require ( __DIR__ . '/widget-controls.php' ); }
 
 	/**
 	 * Render tooltip widget output on the frontend.
@@ -88,7 +88,7 @@ class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
 	 * @since 2.9.0
 	 * @access protected
 	 */
-	protected function content_template() { require ( __DIR__ . '/view/editor.php' ); }
+	protected function content_template() { do_action('go-preview-mode'); }
 
 
     /**
@@ -102,54 +102,6 @@ class GO_2C_PHOTO_ARTICLE_WIDGET extends \Elementor\Widget_Base {
 	 */
 	public function get_query_name() {
 		return $this->get_name();
-	}
-
-    /**
-     * Get post type list
-     * @return array
-     */
-    public function get_post_type()
-    {
-        $list       = [];
-        $post_types = get_post_types(
-            [
-                'public' => true
-            ],
-            'objects'
-        );
-        $exclude = [
-            'page',
-            'attachment',
-            'e-floating-buttons',
-            'elementor_library'
-        ];
-        if ($post_types) {
-            foreach ($post_types as $type) {
-                if (in_array($type->name, $exclude)) continue;
-                $list[$type->name] = $type->labels->singular_name;
-            }
-        }
-        return $list;
-    }
-
-	public function get_loop_items()
-	{
-		$loop_items = new WP_Query(array(
-            'post_type'      => 'elementor_library',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'meta_query'     => [[
-                'key'   => '_elementor_template_type',
-                'value' => 'loop-item'
-            ]]
-        ));
-        $items = [];
-        if ($loop_items->have_posts()): while($loop_items->have_posts()): $loop_items->the_post();
-            global $post;            
-            $items[$post->ID] = $post->post_title;
-        endwhile; endif;
-    
-        return $items;
 	}
 
 }

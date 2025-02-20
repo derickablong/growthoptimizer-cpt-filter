@@ -1,6 +1,6 @@
 <?php
 
-final class GO_2C_PHOTO_ARTICLE {
+final class GO_2C_SIDEBAR_FILTER_ARTICLE {
 
 	/**
 	 * Plugin Version
@@ -120,8 +120,8 @@ final class GO_2C_PHOTO_ARTICLE {
 	 */
 	public function enqueue_styles() {
 		do_action( 'elementor/editor/before_enqueue_styles' );
-		wp_enqueue_style('go-cpt-filter-2c-photo-article-css');
-		wp_enqueue_script('go-cpt-filter-2c-photo-article-script');
+		wp_enqueue_style('go-cpt-filter-2c-sidebar-filter-article-css');
+		wp_enqueue_script('go-cpt-filter-2c-sidebar-filter-article-script');
 	}
 
 
@@ -137,12 +137,12 @@ final class GO_2C_PHOTO_ARTICLE {
 	public function init_widgets() {
 
         // Include widget file        
-		require_once( __DIR__ . '/widget.php' );
+		require_once( __DIR__ . '/widget-base.php' );
 
 		// Register widget
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \GO_2C_PHOTO_ARTICLE_WIDGET() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \GO_2C_SIDEBAR_FILTER_ARTICLE_WIDGET() );
 
 	}	
 
 }
-GO_2C_PHOTO_ARTICLE::instance();
+GO_2C_SIDEBAR_FILTER_ARTICLE::instance();

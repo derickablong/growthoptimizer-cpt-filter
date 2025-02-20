@@ -1,7 +1,9 @@
 <?php
 // use \Elementor\Core\Schemes;
+global $go_cpt_filter;
 
-$post_types = $this->get_post_type();
+$post_types = $go_cpt_filter->get_post_types();
+$loop_items = $go_cpt_filter->get_loop_items();
 
 $this->start_controls_section(
     'section_2c_photo_article_post_type',
@@ -85,7 +87,7 @@ $this->add_control(
     [
         'label'   => __( 'Loop Template', 'elementor' ),
         'type'    => \Elementor\Controls_Manager::SELECT,
-        'options' => $this->get_loop_items(),
+        'options' => $loop_items,
         'default' => '',
     ]
 );

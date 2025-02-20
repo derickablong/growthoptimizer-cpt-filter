@@ -27,15 +27,16 @@ define('BUTTON_CLASSES', [
 
 class GrowthOptimizer_CPT_Filter
 {
-
+    
+    
     # Plugin directory path
-    protected $plugin_dir;
+    public $plugin_dir;
 
     # Plugin directory URL
-    protected $plugin_url;
+    public $plugin_url;
 
     # Template path
-    protected $template_dir;
+    public $widgets_dir;
 
 
     /**
@@ -44,12 +45,13 @@ class GrowthOptimizer_CPT_Filter
      * @param string $plugin_url
      */
     function __construct( $plugin_dir, $plugin_url )
-    {
-        $this->plugin_dir = $plugin_dir;
-        $this->plugin_url = $plugin_url;
-        $this->template_dir = $plugin_dir.'templates/';
+    {       
 
-        $this->init();
+        $this->plugin_dir  = $plugin_dir;
+        $this->plugin_url  = $plugin_url;
+        $this->widgets_dir = $plugin_dir.'widgets/';
+
+        $this->init();        
     }
 
 
@@ -59,25 +61,40 @@ class GrowthOptimizer_CPT_Filter
      */
     private function init()
     {
-        # 2c Photo Article Scripts
-        add_action(
-            'wp_enqueue_scripts',
-            [$this, 'library_2c_photo_article']
-        );
-        # Template filter options
-        add_action(
-            '2c-photo-article-filter-options-template',
-            [$this, 'template_2c_photo_article_filter_options'],
-            10,
-            2
-        );                
         # Preview mode
         add_action(
             'go-preview-mode',
             [$this, 'template_preview_mode'],
             10,
             4
-        );        
+        );   
+        
+        # 2C Photo Article Actions
+        $this->actions_2c_photo_article();
+
+        # 2C Sidebar Filter Article Actions
+        $this->actions_2c_sidebar_filter_article();
+    }
+
+
+    /**
+     * 2C Photo Article Actions
+     * @return void
+     */
+    private function actions_2c_photo_article()
+    {
+        # 2c Photo Article Scripts
+        add_action(
+            'wp_enqueue_scripts',
+            [$this, 'library_2c_photo_article']
+        );
+        # 2C Photo Article Parts Filters
+        add_action(
+            '2c-photo-article-filter-options-template',
+            [$this, 'template_2c_photo_article_filter_options'],
+            10,
+            2
+        );                             
         # Shortcode to display article terms
         add_shortcode(
             '2c-photo-article-terms',
@@ -88,9 +105,65 @@ class GrowthOptimizer_CPT_Filter
             'wp_ajax_2c_photo_article',
             [$this, 'ajax_2c_photo_article']
         );
+    }
 
-        # Create widget
-        include $this->plugin_dir . '/templates/2c-photo-article/widget/create.php';
+
+    /**
+     * 2C Sidebar Filter Article Actions
+     * @return void
+     */
+    private function actions_2c_sidebar_filter_article()
+    {
+        # 2c Photo Article Scripts
+        add_action(
+            'wp_enqueue_scripts',
+            [$this, 'library_2c_sidebar_filter_article']
+        );
+        # 2C Phto Article Parts Filters
+        add_action(
+            '2c-sidebar-filter-article-parts-sidebar',
+            [$this, 'template_2c_sidebar_filter_article_parts_sidebar'],
+            10,
+            2
+        );
+        add_action(
+            '2c-sidebar-filter-article-parts-content',
+            [$this, 'template_2c_sidebar_filter_article_parts_content'],
+            10,
+            2
+        );                                     
+        # Ajax loop
+        add_action(
+            'wp_ajax_2c_sidebar_filter_article',
+            [$this, 'ajax_2c_sidebar_filter_article']
+        );
+    }
+
+
+    /**
+     * 2C Sidebar Filter Article Library
+     * 
+     * @return void
+     */
+    public function library_2c_sidebar_filter_article()
+    {
+        wp_register_style( 
+            'go-cpt-filter-2c-sidebar-filter-article-css', 
+            $this->plugin_url . 'assets/css/2c-sidebar-filter-article.css', 
+            array(), 
+            uniqid(), 
+            'all' 
+        );
+        wp_register_script( 
+            'go-cpt-filter-2c-sidebar-filter-article-script', 
+            $this->plugin_url . 'assets/js/2c-sidebar-filter-article.js', 
+            array( 'jquery' ), 
+            uniqid(), 
+            true
+        );   
+        wp_localize_script( 'go-cpt-filter-2c-sidebar-filter-article-script', 'go_kit', array(
+            'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) )
+        ) );
     }
 
 
@@ -128,7 +201,7 @@ class GrowthOptimizer_CPT_Filter
      */
     public function template_2c_photo_article_filter_options($taxonomies, $button_class)
     {        
-        include $this->template_dir . '2c-photo-article/filter-options.php';
+        include $this->widgets_dir . '2c-photo-article/parts/filters.php';
     }
 
 
@@ -140,7 +213,30 @@ class GrowthOptimizer_CPT_Filter
      */
     public function template_preview_mode()
     {
-        include $this->template_dir . '2c-photo-article/preview.php';
+        include $this->widgets_dir . 'preview.php';
+    }
+
+
+    /**
+     * 2C Sidebar Filter Article Parts Sidebar
+     * 
+     * @param array $taxonomies
+     * @param array $icons
+     * @return void
+     */
+    public function template_2c_sidebar_filter_article_parts_sidebar($taxonomies, $icons)
+    {
+        include $this->widgets_dir . '2c-sidebar-filter-article/parts/sidebar.php';
+    }
+
+
+    /**
+     * 2C Sidebar Filter Article Parts Content
+     * @return void
+     */
+    public function template_2c_sidebar_filter_article_parts_content()
+    {
+        include $this->widgets_dir . '2c-sidebar-filter-article/parts/content.php';
     }
 
 
@@ -208,6 +304,17 @@ class GrowthOptimizer_CPT_Filter
 
 
     /**
+     * Ajax 2C Sidebar Filter Article
+     * @return void
+     */
+    public function ajax_2c_sidebar_filter_article()
+    {
+        wp_send_json();
+        wp_die();
+    }
+
+
+    /**
      * Shortcode to display 2c photo article terms
      * @param array $atts
      * @return bool|string
@@ -233,8 +340,70 @@ class GrowthOptimizer_CPT_Filter
         return ob_get_clean();
     }
 
+    
+    /**
+     * Get template loop items
+     * @return array
+     */
+    public function get_loop_items()
+	{
+		$loop_items = new WP_Query(array(
+            'post_type'      => 'elementor_library',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'meta_query'     => [[
+                'key'   => '_elementor_template_type',
+                'value' => 'loop-item'
+            ]]
+        ));
+        $items = [];
+        if ($loop_items->have_posts()): while($loop_items->have_posts()): $loop_items->the_post();
+            global $post;            
+            $items[$post->ID] = $post->post_title;
+        endwhile; endif;
+    
+        return $items;
+	}
+
+
+    /**
+     * Get post type list
+     * @return array
+     */
+    public function get_post_types()
+    {
+        $list       = [];
+        $post_types = get_post_types(
+            [
+                'public' => true
+            ],
+            'objects'
+        );
+        $exclude = [
+            'page',
+            'attachment',
+            'e-floating-buttons',
+            'elementor_library'
+        ];
+        if ($post_types) {
+            foreach ($post_types as $type) {
+                if (in_array($type->name, $exclude)) continue;
+                $list[$type->name] = $type->labels->singular_name;
+            }
+        }
+        return $list;
+    }
+
 }
-new GrowthOptimizer_CPT_Filter(
+
+
+$go_cpt_filter = new GrowthOptimizer_CPT_Filter(
     GROWTH_OPTIMIZER_FILTER_DIR,
     GROWTH_OPTIMIZER_FILTER_URL
 );
+
+# 2C Photo Article Loop widget
+include $go_cpt_filter->widgets_dir . '/2c-photo-article/elementor.php';
+
+# 2C Sidebar Filter Article Loop Widget
+include $go_cpt_filter->widgets_dir . '/2c-sidebar-filter-article/elementor.php';

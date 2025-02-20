@@ -1,0 +1,81 @@
+.go-2c-sidebar-filter-article {
+    display: grid;
+    grid-template-columns: 592px 1fr;
+    min-height: 100vh;
+}
+.go-sidebar {
+    position: relative;
+    padding-right: 84px;
+    background-color: #E2EDFF;
+}
+.go-sidebar .sidebar-title {
+    margin-bottom: 40px;
+    padding-left: 8px;
+}
+.go-sidebar .filters {
+    width: 317px;
+    margin: 120px 0 120px auto;
+}
+
+.taxonomies {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;    
+}
+.taxonomy-group .taxonomy-title {
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    gap: 8px;
+    border-bottom: solid 1px #C1C7CD;
+    padding-bottom: 21px;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.taxonomy-group .taxonomy-title .icon,
+.taxonomy-group .taxonomy-title .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.taxonomy-group .taxonomy-title svg {
+    width: 100%;
+    height: auto;
+}
+.taxonomy-group .terms {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding-top: 11px;
+    padding-left: 2px;
+}
+.taxonomy-group .terms label {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+.terms input {
+    display: none;
+}
+.terms .checkbox {    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border: solid 1px #C1C7CD;
+}
+.terms .checkbox svg {
+    visibility: hidden;
+    opacity: 0;
+}
+.terms input:checked + .checkbox {
+    background-color: #0F62FE;
+    border: none;
+}
+.terms input:checked + .checkbox svg {
+    visibility: visible;
+    opacity: 1;
+}
+.terms .label {
+    margin-top: 2px;
+}

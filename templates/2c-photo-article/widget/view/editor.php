@@ -1,1 +1,0 @@
-<?php do_action('go-preview-mode'); ?>
