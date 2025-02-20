@@ -124,7 +124,7 @@ class GrowthOptimizer_CPT_Filter
             '2c-sidebar-filter-article-parts-sidebar',
             [$this, 'template_2c_sidebar_filter_article_parts_sidebar'],
             10,
-            2
+            3
         );
         add_action(
             '2c-sidebar-filter-article-parts-content',
@@ -224,7 +224,7 @@ class GrowthOptimizer_CPT_Filter
      * @param array $icons
      * @return void
      */
-    public function template_2c_sidebar_filter_article_parts_sidebar($taxonomies, $icons)
+    public function template_2c_sidebar_filter_article_parts_sidebar($post_type, $taxonomies, $icons)
     {
         include $this->widgets_dir . '2c-sidebar-filter-article/parts/sidebar.php';
     }
@@ -392,6 +392,38 @@ class GrowthOptimizer_CPT_Filter
             }
         }
         return $list;
+    }
+
+
+    /**
+     * Get post count
+     * 
+     * @param string $post_type
+     * @param string $taxonomy
+     * @param array $count
+     */
+    public function post_count($post_type, $taxonomy, $count = [])
+    {              
+
+        $args = [
+            'post_type'      => $post_type,
+            'post_status'    => 'publish',
+            'posts_per_page' => -1
+        ];
+       
+
+        $results = new WP_Query($args);
+        if ($results->have_posts()): 
+            while ($results->have_posts()): $results->the_post();
+                $terms = get_the_terms(get_the_ID(), $taxonomy);
+                foreach ($terms as $term) {
+                    $count[$term->term_id] += 1;
+                }
+            endwhile;         
+        endif;
+        wp_reset_query();
+
+        return $count;        
     }
 
 }

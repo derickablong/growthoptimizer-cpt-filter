@@ -33,7 +33,7 @@ foreach ($settings as $tax_name => $value) {
 ?>
 
 <div class="go-2c-sidebar-filter-article">
-    <?php do_action('2c-sidebar-filter-article-parts-sidebar', $taxonomies, $taxonomy_icons); ?>
+    <?php do_action('2c-sidebar-filter-article-parts-sidebar', $post_type, $taxonomies, $taxonomy_icons); ?>
     <?php do_action('2c-sidebar-filter-article-parts-content'); ?>
 </div>
 <?php endif; ?>

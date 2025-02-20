@@ -1,3 +1,5 @@
+<?php global $go_cpt_filter; ?>
+
 <div class="go-sidebar">
     <div class="filters">
         <h3 class="sidebar-title">Filters</h3>
@@ -9,6 +11,9 @@
                 'taxonomy'   => $tax_slug,
                 'hide_empty' => false,
             ) );
+
+            $post_count = $go_cpt_filter->post_count($post_type, $tax_slug);
+
             ?>
 
             <div class="taxonomy-group">
@@ -32,7 +37,7 @@
                                 <path d="M3.58583 5.06059L1.46451 2.93927L0.050293 4.35348L3.58583 7.88901L9.94979 1.52505L8.53557 0.11084L3.58583 5.06059Z" fill="white"/>
                             </svg>
                         </span>
-                        <span class="label">View All</span>
+                        <span class="label">View All (<?php echo array_sum($post_count) + 0 ?>)</span>
                     </label>
 
                     <?php foreach ($terms as $term): ?>
@@ -44,7 +49,7 @@
                                     <path d="M3.58583 5.06059L1.46451 2.93927L0.050293 4.35348L3.58583 7.88901L9.94979 1.52505L8.53557 0.11084L3.58583 5.06059Z" fill="white"/>
                                 </svg>
                             </span>
-                            <span class="label"><?php echo $term->name ?></span>
+                            <span class="label"><?php echo $term->name ?> (<?php echo $post_count[$term->term_id] + 0 ?>)</span>
                         </label>
 
                     <?php endforeach; ?>
