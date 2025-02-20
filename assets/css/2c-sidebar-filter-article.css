@@ -111,6 +111,7 @@
     height: 67px;
     border-bottom: solid 1px #C1C7CD;
     background-color: #F2F4F8;
+    margin: 0 0 45px;
 }
 .search-widget input {
     position: relative;
@@ -146,8 +147,7 @@
 
 .go-content .results {
     position: relative;
-    display: grid;
-    margin-top: 45px;
+    display: grid;    
     min-height: 50px;
 }
 .go-content .results::after {

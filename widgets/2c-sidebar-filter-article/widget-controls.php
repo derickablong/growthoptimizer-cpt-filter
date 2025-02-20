@@ -115,63 +115,6 @@ $this->end_controls_section();
 
 
 
-# Grid Spacing
-$this->start_controls_section(
-    'section_2c_photo_article_grid_spacing_style',
-    [
-        'label' => __( 'Spacing', 'elementor' ),
-        'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-    ]
-);	
-
-# Control column gap
-$this->add_responsive_control(
-    'column_gap',
-    [
-        'type'               => \Elementor\Controls_Manager::NUMBER,
-        'label'              => esc_html__( 'Column Gap', 'elementor' ),
-        'placeholder'        => esc_html__( '0', 'elementor' ),
-        'frontend_available' => true,
-        'devices'            => [ 'desktop', 'tablet', 'mobile' ],
-        'default'            => 30,
-        'tablet_default'     => [
-            'size' => 30,
-            'unit' => 'px'
-        ],
-        'mobile_default'     => [
-            'size' => 30,
-            'unit' => 'px'
-        ],
-        'selectors'          => [
-            '{{WRAPPER}} .go-content .results' => 'column-gap: {{VALUE}}px;',
-        ],
-    ]
-);
-
-# Control row gap
-$this->add_responsive_control(
-    'row_gap',
-    [
-        'type'               => \Elementor\Controls_Manager::NUMBER,
-        'label'              => esc_html__( 'Row Gap', 'elementor' ),
-        'placeholder'        => esc_html__( '0', 'elementor' ),
-        'frontend_available' => true,
-        'devices'            => [ 'desktop', 'tablet', 'mobile' ],
-        'default'            => 30,
-        'tablet_default'     => 30,
-        'mobile_default'     => 30,
-        'selectors'          => [
-            '{{WRAPPER}} .go-content .results' => 'row-gap: {{VALUE}}px;',
-        ],
-    ]
-);
-
-$this->end_controls_section();
-
-
-
-
-
 # Sidebar
 $this->start_controls_section(
     'section_2c_photo_article_sidebar_style',
@@ -217,7 +160,7 @@ $this->add_responsive_control(
     'sidebar_title_spacing',
     [
         'type' => \Elementor\Controls_Manager::DIMENSIONS,
-        'label' => esc_html__( 'Margin', 'elementor' ),
+        'label' => esc_html__( 'Title Margin', 'elementor' ),
         'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
         'selectors' => [
             '{{WRAPPER}} .sidebar-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -250,7 +193,7 @@ $this->add_responsive_control(
     'category_heading_spacing',
     [
         'type' => \Elementor\Controls_Manager::DIMENSIONS,
-        'label' => esc_html__( 'Margin', 'elementor' ),
+        'label' => esc_html__( 'Category Heading Margin', 'elementor' ),
         'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
         'selectors' => [
             '{{WRAPPER}} .taxonomy-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -337,6 +280,69 @@ $this->add_control(
 			'{{WRAPPER}} .go-content' => 'background-color: {{VALUE}};',
 		],
 	]
+);
+
+# Control column gap
+$this->add_responsive_control(
+    'column_gap',
+    [
+        'type'               => \Elementor\Controls_Manager::NUMBER,
+        'label'              => esc_html__( 'Results Column Gap', 'elementor' ),
+        'placeholder'        => esc_html__( '0', 'elementor' ),
+        'frontend_available' => true,
+        'devices'            => [ 'desktop', 'tablet', 'mobile' ],
+        'default'            => 30,
+        'tablet_default'     => [
+            'size' => 30,
+            'unit' => 'px'
+        ],
+        'mobile_default'     => [
+            'size' => 30,
+            'unit' => 'px'
+        ],
+        'selectors'          => [
+            '{{WRAPPER}} .go-content .results' => 'column-gap: {{VALUE}}px;',
+        ],
+    ]
+);
+
+# Control row gap
+$this->add_responsive_control(
+    'row_gap',
+    [
+        'type'               => \Elementor\Controls_Manager::NUMBER,
+        'label'              => esc_html__( 'Results Row Gap', 'elementor' ),
+        'placeholder'        => esc_html__( '0', 'elementor' ),
+        'frontend_available' => true,
+        'devices'            => [ 'desktop', 'tablet', 'mobile' ],
+        'default'            => 30,
+        'tablet_default'     => 30,
+        'mobile_default'     => 30,
+        'selectors'          => [
+            '{{WRAPPER}} .go-content .results' => 'row-gap: {{VALUE}}px;',
+        ],
+    ]
+);
+
+$this->add_group_control(
+    \Elementor\Group_Control_Typography::get_type(),
+    [
+        'name'     => 'search_typography',
+        'label'    => 'Search Typography',
+        'selector' => '{{WRAPPER}} .search-widget input, {{WRAPPER}} .search-widget ::placeholder',
+    ]
+);
+
+$this->add_responsive_control(
+    'search_spacing',
+    [
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'label' => esc_html__( 'Search Margin', 'elementor' ),
+        'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+        'selectors' => [
+            '{{WRAPPER}} .search-widget' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
 );
 
 $this->end_controls_section();
