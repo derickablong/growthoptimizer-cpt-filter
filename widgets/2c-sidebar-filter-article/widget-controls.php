@@ -135,6 +135,17 @@ $this->add_control(
 	]
 );
 
+$this->add_responsive_control(
+    'sidebar_spacing',
+    [
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'label' => esc_html__( 'Padding', 'elementor' ),
+        'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+        'selectors' => [
+            '{{WRAPPER}} .go-sidebar' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
 
 $this->add_group_control(
     \Elementor\Group_Control_Typography::get_type(),
@@ -280,6 +291,18 @@ $this->add_control(
 			'{{WRAPPER}} .go-content' => 'background-color: {{VALUE}};',
 		],
 	]
+);
+
+$this->add_responsive_control(
+    'content_spacing',
+    [
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'label' => esc_html__( 'Padding', 'elementor' ),
+        'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+        'selectors' => [
+            '{{WRAPPER}} .go-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
 );
 
 # Control column gap

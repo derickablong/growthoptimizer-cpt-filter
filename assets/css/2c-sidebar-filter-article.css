@@ -15,7 +15,7 @@
 .go-sidebar .filters {
     max-width: 317px;
     width: 100%;
-    margin: 120px 0 120px auto;
+    margin: 0 0 0 auto;
 }
 
 .taxonomies {
@@ -197,8 +197,7 @@
         grid-template-columns: 1fr;
         min-height: 100%;
     }    
-    .go-sidebar .filters {
-        margin: 7% auto;
+    .go-sidebar .filters {        
         max-width: 100%;
     }
     .go-content {
