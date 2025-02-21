@@ -7,7 +7,7 @@
         <div class="taxonomies">
         <?php 
         foreach ($taxonomies as $tax_slug => $tax_title): 
-            if (!taxonomy_exists($tax_slug)) continue;
+            if (!taxonomy_exists($tax_slug) || $tax_title == 'no') continue;
             $terms = get_terms( array(
                 'taxonomy'   => $tax_slug,
                 'hide_empty' => false,
