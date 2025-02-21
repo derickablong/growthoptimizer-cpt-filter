@@ -59,6 +59,7 @@ foreach ($post_types as $type => $name) {
 					'library' => 'fa-solid',
 				],				
                 'condition'    => [
+                    'post_type' => $type,
                     'taxonomy_'.$taxonomy_slug => $taxonomy->label
                 ]
 			]
