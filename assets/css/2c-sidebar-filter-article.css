@@ -172,6 +172,59 @@
     transition: all 0.5s ease-in-out;
 }
 
+
+.go-content .navigate {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 65px auto 0;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+.navigate a,
+.navigate .page-numbers {
+    display: flex;
+    align-items: center;    
+    text-decoration: none;
+    justify-content: center;
+}
+.navigate a:not(.next):not(.prev),
+.navigate .current {
+    width: 40px;
+    height: 40px;
+}
+.navigate a {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    letter-spacing: 0.5px;
+    color: #0F62FE;
+}
+.navigate .current {
+    background-color: #001D6C;
+    border-radius: 50%;
+    color: #fff;
+}
+.navigate a.next,
+.navigate a.prev {
+    line-height: 1;
+}
+.navigate a.prev {
+    margin-right: 24px;
+    color: #121619;
+}
+.navigate a.prev  svg {
+    margin-right: 8px;
+}
+.navigate a.next {
+    margin-left: 24px;
+}
+.navigate a.next svg {
+    margin-left: 8px;
+}
+
+
 @media only screen and (max-width: 1800px) {
     .go-content {
         padding-left: 7%;
@@ -203,5 +256,11 @@
     .go-content {
         padding-top: 7%;
         padding-bottom: 7%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .navigate a.next,
+    .navigate a.prev {
+        display: none;
     }
 }

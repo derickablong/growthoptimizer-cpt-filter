@@ -10,5 +10,7 @@
 
         <div class="results loading"></div>
 
+        <div class="navigate"></div>
+
     </div>
 </div>

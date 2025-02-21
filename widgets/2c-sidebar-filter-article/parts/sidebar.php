@@ -12,7 +12,8 @@
                 'hide_empty' => false,
             ) );
 
-            $post_count = $go_cpt_filter->post_count($post_type, $tax_slug);
+            $articles   = $go_cpt_filter->post_count($post_type, $tax_slug);
+            $post_count = $articles['count'];
 
             ?>
 
@@ -37,7 +38,7 @@
                                 <path d="M3.58583 5.06059L1.46451 2.93927L0.050293 4.35348L3.58583 7.88901L9.94979 1.52505L8.53557 0.11084L3.58583 5.06059Z" fill="white"/>
                             </svg>
                         </span>
-                        <span class="label">View All (<?php echo array_sum($post_count) + 0 ?>)</span>
+                        <span class="label">View All (<?php echo $articles['posts'] ?>)</span>
                     </label>
 
                     <?php foreach ($terms as $term): ?>
