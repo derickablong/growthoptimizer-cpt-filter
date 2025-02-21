@@ -70,15 +70,19 @@ foreach ($post_types as $type => $name) {
                 ]
 			]
 		);
+
+        $this->add_control(
+            'tax_icon_'.$taxonomy_slug.'_devider',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+                'condition'    => [
+                    'post_type' => $type,
+                    'taxonomy_'.$taxonomy_slug => $taxonomy->label
+                ]
+            ]
+        );
     }
 }
-
-$this->add_control(
-    'taxonomies_divider',
-    [
-        'type' => \Elementor\Controls_Manager::DIVIDER
-    ]
-);
 
 # Control Posts per page
 $this->add_control(
