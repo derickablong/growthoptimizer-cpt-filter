@@ -349,7 +349,7 @@ class GrowthOptimizer_CPT_Filter
                     'terms'    => $categories,
                     'operator' => 'IN'
                 ];
-            }
+            }        
         }
 
         $results = new WP_Query($args);

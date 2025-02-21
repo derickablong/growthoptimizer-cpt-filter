@@ -107,6 +107,7 @@
         },
 
         _search: function() {
+            GO_2C_SIDEBAR_FILTER_ARTICLE.paged   = 1;
             GO_2C_SIDEBAR_FILTER_ARTICLE.keyword = GO_2C_SIDEBAR_FILTER_ARTICLE.search.val();
             GO_2C_SIDEBAR_FILTER_ARTICLE._request();
         },
@@ -156,6 +157,7 @@
             } else {
                 container.find('.term-view-all').prop('checked', false);
             }
+            GO_2C_SIDEBAR_FILTER_ARTICLE.paged = 1;
             GO_2C_SIDEBAR_FILTER_ARTICLE._request();
         },
 
