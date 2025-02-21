@@ -318,6 +318,7 @@ class GrowthOptimizer_CPT_Filter
         $post_type  = $_POST['post_type'];
         $taxonomies = $_POST['taxonomies'];
         $loop_item  = $_POST['loop'];
+        $keyword    = trim($_POST['keyword']);
 
         # Filter
         $paged    = $_POST['paged'];
@@ -328,6 +329,7 @@ class GrowthOptimizer_CPT_Filter
             'post_status'    => 'publish',
             'posts_per_page' => $per_page,
             'paged'          => $paged,
+            's'              => $keyword,
             'orderby'        => 'date',
             'order'          => 'DESC'
         ];

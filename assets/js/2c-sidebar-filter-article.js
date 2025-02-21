@@ -9,6 +9,9 @@
         per_page     : 0,
         post_type    : null,
         loop         : 0,
+        search       : null,
+        timer        : null,
+        keyword      : null,
 
         _init: function() {
             GO_2C_SIDEBAR_FILTER_ARTICLE._elements(
@@ -37,6 +40,17 @@
                 'click',
                 '.go-content .navigate a',
                 GO_2C_SIDEBAR_FILTER_ARTICLE._navigate
+            );
+
+            // Search
+            GO_2C_SIDEBAR_FILTER_ARTICLE.search.on(
+                'keyup',
+                GO_2C_SIDEBAR_FILTER_ARTICLE._start_search
+            );
+            GO_2C_SIDEBAR_FILTER_ARTICLE.search.on(
+                'keydown', function() {
+                    clearTimeout(GO_2C_SIDEBAR_FILTER_ARTICLE.timer);
+                }
             );
 
             // Load default
@@ -85,6 +99,18 @@
             _callback(taxonomies);
         },
 
+        _start_search: function() {
+            clearTimeout(GO_2C_SIDEBAR_FILTER_ARTICLE.timer);
+            GO_2C_SIDEBAR_FILTER_ARTICLE.timer = setTimeout(
+                GO_2C_SIDEBAR_FILTER_ARTICLE._search, 500
+            );
+        },
+
+        _search: function() {
+            GO_2C_SIDEBAR_FILTER_ARTICLE.keyword = GO_2C_SIDEBAR_FILTER_ARTICLE.search.val();
+            GO_2C_SIDEBAR_FILTER_ARTICLE._request();
+        },
+
         _request: function() {
             GO_2C_SIDEBAR_FILTER_ARTICLE._get_terms(function(taxonomies) {
                 GO_2C_SIDEBAR_FILTER_ARTICLE._server({
@@ -93,6 +119,7 @@
                     paged     : GO_2C_SIDEBAR_FILTER_ARTICLE.paged,
                     per_page  : GO_2C_SIDEBAR_FILTER_ARTICLE.per_page,
                     loop      : GO_2C_SIDEBAR_FILTER_ARTICLE.loop,
+                    keyword   : GO_2C_SIDEBAR_FILTER_ARTICLE.keyword,
                     taxonomies: taxonomies,
                 }, GO_2C_SIDEBAR_FILTER_ARTICLE._load);
             });
@@ -157,6 +184,7 @@
             GO_2C_SIDEBAR_FILTER_ARTICLE.loop       = parseInt($('.cpt-2c-sidebar-filter-article').data('loop'));
             GO_2C_SIDEBAR_FILTER_ARTICLE.results    = $('.go-content .results');
             GO_2C_SIDEBAR_FILTER_ARTICLE.pagination = $('.go-content .navigate');
+            GO_2C_SIDEBAR_FILTER_ARTICLE.search     = $('.search-widget input');
             _callback();
         }
     }
