@@ -25,6 +25,12 @@ $this->add_control(
     ]
 );
 
+$this->add_control(
+    'post_type_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 # Control Taxonomies
 foreach ($post_types as $type => $name) {
@@ -67,6 +73,12 @@ foreach ($post_types as $type => $name) {
     }
 }
 
+$this->add_control(
+    'taxonomies_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 # Control Posts per page
 $this->add_control(
@@ -98,6 +110,12 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'loop_template_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 # Control Loop Template
 $this->add_control(
@@ -148,6 +166,13 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'sidebar_title_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
+
 $this->add_group_control(
     \Elementor\Group_Control_Typography::get_type(),
     [
@@ -180,6 +205,12 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'category_heading_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 $this->add_group_control(
     \Elementor\Group_Control_Typography::get_type(),
@@ -213,6 +244,12 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'checkbox_label_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 $this->add_group_control(
     \Elementor\Group_Control_Typography::get_type(),
@@ -306,6 +343,13 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'results_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
+
 # Control column gap
 $this->add_responsive_control(
     'column_gap',
@@ -345,6 +389,13 @@ $this->add_responsive_control(
         'selectors'          => [
             '{{WRAPPER}} .go-content .results' => 'row-gap: {{VALUE}}px;',
         ],
+    ]
+);
+
+$this->add_control(
+    'search_widget_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
     ]
 );
 
@@ -427,6 +478,13 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'pagination_spacing_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
+
 $this->add_group_control(
     \Elementor\Group_Control_Typography::get_type(),
     [
@@ -444,6 +502,13 @@ $this->add_control(
 			'{{WRAPPER}} .go-content .navigate a' => 'color: {{VALUE}};',
 		],
 	]
+);
+
+$this->add_control(
+    'active_color_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
 );
 
 $this->add_control(
@@ -466,6 +531,13 @@ $this->add_control(
 			'{{WRAPPER}} .go-content .navigate .current' => 'background-color: {{VALUE}};',
 		],
 	]
+);
+
+$this->add_control(
+    'prev_next_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
 );
 
 $this->add_control(

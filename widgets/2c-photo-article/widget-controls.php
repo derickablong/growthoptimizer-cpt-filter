@@ -26,6 +26,13 @@ $this->add_control(
 );
 
 
+$this->add_control(
+    'post_type_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
+
 # Control Taxonomies
 foreach ($post_types as $type => $name) {
     $taxonomies = get_object_taxonomies($type, 'objects');
@@ -48,6 +55,13 @@ foreach ($post_types as $type => $name) {
         );
     }
 }
+
+$this->add_control(
+    'taxonomies_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER        
+    ]
+);
 
 
 # Control Posts per page
@@ -80,6 +94,12 @@ $this->add_responsive_control(
     ]
 );
 
+$this->add_control(
+    'loop_template_divider',
+    [
+        'type' => \Elementor\Controls_Manager::DIVIDER
+    ]
+);
 
 # Control Loop Template
 $this->add_control(
