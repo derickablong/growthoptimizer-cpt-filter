@@ -7,6 +7,7 @@
         <div class="taxonomies">
         <?php 
         foreach ($taxonomies as $tax_slug => $tax_title): 
+            if (!taxonomy_exists($tax_slug)) continue;
             $terms = get_terms( array(
                 'taxonomy'   => $tax_slug,
                 'hide_empty' => false,
@@ -41,7 +42,10 @@
                         <span class="label">View All (<?php echo $articles['posts'] ?>)</span>
                     </label>
 
-                    <?php foreach ($terms as $term): ?>
+                    <?php 
+                    foreach ($terms as $term): 
+                        if (!term_exists($term->term_id)) continue;
+                        ?>
 
                         <label for="term-<?php echo $term->term_id ?>">
                             <input type="checkbox" class="term term-checkbox" id="term-<?php echo $term->term_id ?>"  data-term="<?php echo $tax_slug ?>" value="<?php echo $term->term_id ?>">
